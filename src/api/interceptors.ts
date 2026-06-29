@@ -22,6 +22,7 @@ export const setupInterceptors = (api: AxiosInstance) => {
 
     async (error: AxiosError) => {
       if (error.response?.status === 401) {
+        // eslint-disable-next-line no-console
         console.warn("Unauthorized request");
 
         // Future implementation:

@@ -35,6 +35,7 @@ export default function AuthProvider({ children }: Props) {
     const user = authStorage.getUser();
 
     if (token && user) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setUser(user);
     }
 
