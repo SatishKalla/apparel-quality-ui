@@ -1,6 +1,7 @@
 import { Button, Card, Form, Input } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/auth/useAuth";
+import { AllRoutes } from "@/shared/constants/routes";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ export default function Login() {
   const onFinish = async (values: { username: string; password: string }) => {
     await login(values.username, values.password);
 
-    navigate("/");
+    navigate(AllRoutes.dashboard);
   };
 
   return (

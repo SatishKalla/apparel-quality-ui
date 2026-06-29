@@ -1,12 +1,43 @@
-import { Button, Flex, Typography } from "antd";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/auth/useAuth";
+import {
+  BellOutlined,
+  LogoutOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+import { Avatar, Badge, Button, Dropdown, Flex, Space, Typography } from "antd";
+import { useNavigate } from "react-router-dom";
 
-const { Title } = Typography;
+const { Text } = Typography;
 
-export default function AppHeader() {
-  const { logout } = useAuth();
+interface Props {
+  collapsed: boolean;
+  onToggle: () => void;
+}
+
+export default function AppHeader({ collapsed, onToggle }: Props) {
   const navigate = useNavigate();
+  const { logout, user } = useAuth();
+
+  const items = [
+    {
+      key: "profile",
+      label: "Profile",
+    },
+    {
+      key: "settings",
+      label: "Settings",
+    },
+    {
+      type: "divider" as const,
+    },
+    {
+      key: "logout",
+      label: "Logout",
+      icon: <LogoutOutlined />,
+    },
+  ];
 
   return (
     <Flex
@@ -17,18 +48,46 @@ export default function AppHeader() {
         padding: "0 24px",
       }}
     >
-      <Title level={4} style={{ margin: 0 }}>
-        Apparel Quality Inspection
-      </Title>
-
       <Button
-        onClick={() => {
-          logout();
-          navigate("/login");
-        }}
-      >
-        Logout
-      </Button>
+        type="text"
+        icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        onClick={onToggle}
+      />
+
+      <Space size="large">
+        <Badge count={3}>
+          <BellOutlined style={{ fontSize: 18 }} />
+        </Badge>
+
+        <Dropdown
+          menu={{
+            items,
+            onClick: ({ key }) => {
+              switch (key) {
+                case "profile":
+                  navigate("/profile");
+                  break;
+
+                case "settings":
+                  navigate("/settings");
+                  break;
+
+                case "logout":
+                  logout();
+                  navigate("/login");
+                  break;
+              }
+            },
+          }}
+          trigger={["click"]}
+        >
+          <Space style={{ cursor: "pointer" }}>
+            <Avatar icon={<UserOutlined />} />
+
+            <Text strong>{user?.username ?? "Admin"}</Text>
+          </Space>
+        </Dropdown>
+      </Space>
     </Flex>
   );
 }

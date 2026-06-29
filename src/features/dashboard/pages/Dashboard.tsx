@@ -3,6 +3,7 @@ import { Row, Col } from "antd";
 import StatisticCard from "../components/StatisticCard";
 import { useDashboard } from "../hooks/useDashboard";
 import { AppLoader, AppPage } from "@/components/ui";
+import AppEmpty from "@/components/common/AppEmpty";
 
 export default function Dashboard() {
   const { data, isLoading } = useDashboard();
@@ -12,7 +13,7 @@ export default function Dashboard() {
   }
 
   if (!data) {
-    return null;
+    return <AppEmpty />;
   }
 
   return (
