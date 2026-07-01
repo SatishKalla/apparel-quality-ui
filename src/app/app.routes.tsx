@@ -36,7 +36,6 @@ export const appRoutes: AppRoute[] = [
     showInMenu: true,
     breadcrumb: ["Dashboard", "Inspection Management"],
   },
-
   {
     path: "/inspections/create",
     title: "Create Inspection",
@@ -61,6 +60,22 @@ export const appRoutes: AppRoute[] = [
     icon: <BankOutlined />,
     showInMenu: true,
     breadcrumb: ["Dashboard", "Factory Management"],
+  },
+  {
+    path: "/factories/create",
+    title: "Create Factory",
+    breadcrumb: ["Dashboard", "Factory Management", "Create Factory"],
+  },
+
+  {
+    path: "/factories/:id",
+    title: "Factory Details",
+    breadcrumb: ["Dashboard", "Factory Management", "Factory Details"],
+  },
+  {
+    path: "/factories/:id/edit",
+    title: "Edit Factory",
+    breadcrumb: ["Dashboard", "Factory Management", "Edit Factory"],
   },
 
   {

@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 
 import { AppLoader, AppPage } from "@/components/ui";
