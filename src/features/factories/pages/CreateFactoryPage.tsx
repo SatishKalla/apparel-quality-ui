@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useCreateFactory } from "../hooks";
 import { AppPage } from "@/components/ui";
-import FactoryForm from "../components/FactoryForm";
+import { FactoryForm } from "../components";
 
 export default function CreateFactoryPage() {
   const navigate = useNavigate();

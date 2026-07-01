@@ -1,46 +1,44 @@
 import { Spin, message } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { useFactory, useUpdateFactory } from "../hooks";
-import { AppPage } from "@/components/ui";
-import { FactoryForm } from "../components";
+import { InspectorForm } from "../components";
 
-export default function EditFactoryPage() {
+import { useInspector, useUpdateInspector } from "../hooks";
+import { AppPage } from "@/components/ui";
+
+export default function EditInspectorPage() {
   const { id } = useParams();
 
   const navigate = useNavigate();
 
-  const factoryId = Number(id);
+  const inspectorId = Number(id);
 
-  const { data, isLoading } = useFactory(factoryId);
+  const { data, isLoading } = useInspector(inspectorId);
 
-  const mutation = useUpdateFactory();
+  const mutation = useUpdateInspector();
 
   if (isLoading) {
     return <Spin />;
   }
 
   if (!data) {
-    return <div>Factory not found.</div>;
+    return <div>Inspector not found.</div>;
   }
 
   return (
-    <AppPage title="Edit Factory">
-      <FactoryForm
+    <AppPage title="Edit Inspector">
+      <InspectorForm
         initialValues={data}
-
         loading={mutation.isPending}
-
         onSubmit={async (values) => {
           await mutation.mutateAsync({
-            id: factoryId,
-
+            id: inspectorId,
             data: values,
           });
 
-          message.success("Factory updated successfully");
+          message.success("Inspector updated successfully");
 
-          navigate("/factories");
+          navigate("/inspectors");
         }}
       />
     </AppPage>

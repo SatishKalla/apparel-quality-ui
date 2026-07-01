@@ -9,10 +9,18 @@ import InspectionListPage from "@/features/inspections/pages/InspectionListPage"
 import CreateInspectionPage from "@/features/inspections/pages/CreateInspectionPage";
 import EditInspectionPage from "@/features/inspections/pages/EditInspectionPage";
 import InspectionDetailsPage from "@/features/inspections/pages/InspectionDetailsPage";
-import FactoryListPage from "@/features/factories/pages/FactoryListPage";
-import FactoryDetailsPage from "@/features/factories/pages/FactoryDetailsPage";
-import CreateFactoryPage from "@/features/factories/pages/CreateFactoryPage";
-import EditFactoryPage from "@/features/factories/pages/EditFactoryPage";
+import {
+  FactoryListPage,
+  FactoryDetailsPage,
+  CreateFactoryPage,
+  EditFactoryPage,
+} from "@/features/factories/pages";
+import {
+  InspectorListPage,
+  CreateInspectorPage,
+  InspectorDetailsPage,
+  EditInspectorPage,
+} from "@/features/inspectors";
 
 export default function AppRoutes() {
   return (
@@ -33,6 +41,11 @@ export default function AppRoutes() {
             <Route path="/factories/create" element={<CreateFactoryPage />} />
             <Route path="/factories/:id" element={<FactoryDetailsPage />} />
             <Route path="/factories/:id/edit" element={<EditFactoryPage />} />
+
+            <Route path="/inspectors" element={<InspectorListPage />} />
+            <Route path="/inspectors/create" element={<CreateInspectorPage />} />
+            <Route path="/inspectors/:id" element={<InspectorDetailsPage />} />
+            <Route path="/inspectors/:id/edit" element={<EditInspectorPage />} />
           </Route>
         </Route>
       </Routes>

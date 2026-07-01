@@ -5,8 +5,7 @@ import { useDebounce } from "@/shared/hooks/useDebounce";
 
 import { useDeleteFactory, useFactoryList } from "../hooks";
 import { AppPage } from "@/components/ui";
-import FactoryToolbar from "../components/FactoryToolbar";
-import FactoryTable from "../components/FactoryTable";
+import { FactoryToolbar, FactoryTable } from "../components";
 import { defaultFactoryQuery } from "../constants/defaultFactoryQuery";
 
 export default function FactoryListPage() {
