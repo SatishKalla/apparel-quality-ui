@@ -12,6 +12,7 @@ export default function CreateInspectionPage() {
 
   const createMutation = useCreateInspection();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSubmit = async (values: any) => {
     await createMutation.mutateAsync(values);
 

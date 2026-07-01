@@ -1,4 +1,4 @@
-import { Button, Popconfirm, Space, Table, type TableColumnsType } from "antd";
+import { Popconfirm, Space, Table, type TableColumnsType } from "antd";
 import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
 
 import type { Inspection, InspectionQuery } from "../types/inspection.types";
