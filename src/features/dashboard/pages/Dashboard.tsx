@@ -1,38 +1,44 @@
-import { Row, Col } from "antd";
+import { Col, Row, Spin } from "antd";
 
-import StatisticCard from "../components/StatisticCard";
-import { useDashboard } from "../hooks/useDashboard";
-import { AppLoader, AppPage } from "@/components/ui";
-import AppEmpty from "@/components/common/AppEmpty";
+import {
+  DashboardSummaryCards,
+  InspectionStatusChart,
+  InspectionTrendChart,
+  RecentInspectionsTable,
+  TopFactoriesCard,
+} from "../components";
 
-export default function Dashboard() {
+import { useDashboard } from "../hooks";
+import { AppPage } from "@/components/ui";
+
+export default function DashboardPage() {
   const { data, isLoading } = useDashboard();
 
-  if (isLoading) {
-    return <AppLoader />;
-  }
-
-  if (!data) {
-    return <AppEmpty />;
+  if (isLoading || !data) {
+    return <Spin size="large" />;
   }
 
   return (
     <AppPage title="Dashboard">
-      <Row gutter={[16, 16]}>
-        <Col span={6}>
-          <StatisticCard title="Total" value={data.totalInspections} />
+      <DashboardSummaryCards summary={data.summary} />
+
+      <Row gutter={24} style={{ marginTop: 24 }}>
+        <Col xs={24} lg={16}>
+          <InspectionTrendChart data={data.monthlyTrend} />
         </Col>
 
-        <Col span={6}>
-          <StatisticCard title="Passed" value={data.passedInspections} />
+        <Col xs={24} lg={8}>
+          <InspectionStatusChart data={data.inspectionStatus} />
+        </Col>
+      </Row>
+
+      <Row gutter={24} style={{ marginTop: 24 }}>
+        <Col xs={24} lg={16}>
+          <RecentInspectionsTable data={data.recentInspections} />
         </Col>
 
-        <Col span={6}>
-          <StatisticCard title="Rejected" value={data.rejectedInspections} />
-        </Col>
-
-        <Col span={6}>
-          <StatisticCard title="Pending" value={data.pendingInspections} />
+        <Col xs={24} lg={8}>
+          <TopFactoriesCard data={data.topFactories} />
         </Col>
       </Row>
     </AppPage>

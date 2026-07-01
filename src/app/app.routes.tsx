@@ -3,7 +3,6 @@ import {
   BarChartOutlined,
   CheckSquareOutlined,
   DashboardOutlined,
-  SettingOutlined,
   TeamOutlined,
 } from "@ant-design/icons";
 
@@ -108,13 +107,5 @@ export const appRoutes: AppRoute[] = [
     icon: <BarChartOutlined />,
     showInMenu: true,
     breadcrumb: ["Dashboard", "Reports"],
-  },
-
-  {
-    path: "/settings",
-    title: "Settings",
-    icon: <SettingOutlined />,
-    showInMenu: true,
-    breadcrumb: ["Dashboard", "Settings"],
   },
 ];
