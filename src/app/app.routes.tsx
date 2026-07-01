@@ -85,6 +85,22 @@ export const appRoutes: AppRoute[] = [
     showInMenu: true,
     breadcrumb: ["Dashboard", "Inspector Management"],
   },
+  {
+    path: "/inspectors/create",
+    title: "Create Inspector",
+    breadcrumb: ["Dashboard", "Inspector Management", "Create Inspector"],
+  },
+
+  {
+    path: "/inspectors/:id",
+    title: "Inspector Details",
+    breadcrumb: ["Dashboard", "Inspector Management", "Inspector Details"],
+  },
+  {
+    path: "/inspectors/:id/edit",
+    title: "Edit Inspector",
+    breadcrumb: ["Dashboard", "Inspector Management", "Edit Inspector"],
+  },
 
   {
     path: "/reports",

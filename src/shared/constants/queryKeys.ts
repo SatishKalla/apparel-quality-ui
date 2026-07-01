@@ -5,5 +5,7 @@ export const QueryKeys = {
 
   factories: "factories",
 
+  inspectors: "inspectors",
+
   dashboard: "dashboard",
 };

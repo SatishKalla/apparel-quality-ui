@@ -4,7 +4,7 @@ import { EditOutlined } from "@ant-design/icons";
 
 import { useNavigate, useParams } from "react-router-dom";
 
-import FactoryStatusTag from "../components/FactoryStatusTag";
+import { FactoryStatusTag } from "../components";
 
 import { useFactory } from "../hooks";
 import { AppPage } from "@/components/ui";
