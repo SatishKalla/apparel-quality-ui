@@ -1,17 +1,13 @@
-import type { DashboardSummary } from "../types/dashboard.types";
+import { delay } from "@/shared/utils/mockData";
+import { dashboardData } from "../mocks/dashboard-data";
 
-export class DashboardService {
-  async getSummary(): Promise<DashboardSummary> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          totalInspections: 150,
-          passedInspections: 132,
-          rejectedInspections: 8,
-          pendingInspections: 10,
-        });
-      }, 500);
-    });
+import type { DashboardData } from "../types/dashboard.types";
+
+class DashboardService {
+  async getDashboard(): Promise<DashboardData> {
+    await delay();
+
+    return structuredClone(dashboardData);
   }
 }
 

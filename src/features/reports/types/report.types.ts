@@ -5,29 +5,30 @@ export interface DashboardSummary {
   pendingInspections: number;
 
   totalFactories: number;
-  activeFactories: number;
-
   totalInspectors: number;
-  activeInspectors: number;
-
-  passRate: number;
 }
 
-export interface MonthlyInspectionTrend {
+export interface MonthlyInspection {
   month: string;
   passed: number;
   failed: number;
   pending: number;
 }
 
-export interface InspectionStatus {
-  name: "Passed" | "Failed" | "Pending";
-  value: number;
+export interface FactorySummary {
+  factory: string;
+  inspections: number;
+}
+
+export interface BuyerSummary {
+  buyer: string;
+  inspections: number;
 }
 
 export interface RecentInspection {
   id: number;
   inspectionNo: string;
+  styleNo: string;
   buyer: string;
   factory: string;
   inspector: string;
@@ -35,19 +36,10 @@ export interface RecentInspection {
   inspectionDate: string;
 }
 
-export interface TopFactory {
-  name: string;
-  inspections: number;
-}
-
-export interface DashboardData {
+export interface ReportData {
   summary: DashboardSummary;
-
-  monthlyTrend: MonthlyInspectionTrend[];
-
-  inspectionStatus: InspectionStatus[];
-
-  topFactories: TopFactory[];
-
+  monthlyTrend: MonthlyInspection[];
+  factorySummary: FactorySummary[];
+  buyerSummary: BuyerSummary[];
   recentInspections: RecentInspection[];
 }

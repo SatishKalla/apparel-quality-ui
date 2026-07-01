@@ -11,10 +11,7 @@ export const inspectorSchema = z.object({
 
   specialization: z.string().min(1, "Specialization is required"),
 
-  experience: z.coerce
-    .number()
-    .min(0, "Experience cannot be negative")
-    .max(50, "Experience is invalid"),
+  experience: z.number().min(0, "Experience cannot be negative").max(50, "Experience is invalid"),
 
   factory: z.string().min(1, "Factory is required"),
 

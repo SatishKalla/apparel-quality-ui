@@ -1,12 +1,11 @@
 import { useAuth } from "@/auth/useAuth";
 import {
-  BellOutlined,
   LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Avatar, Badge, Button, Dropdown, Flex, Space, Typography } from "antd";
+import { Avatar, Button, Dropdown, Flex, Space, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
 
 const { Text } = Typography;
@@ -55,10 +54,6 @@ export default function AppHeader({ collapsed, onToggle }: Props) {
       />
 
       <Space size="large">
-        <Badge count={3}>
-          <BellOutlined style={{ fontSize: 18 }} />
-        </Badge>
-
         <Dropdown
           menu={{
             items,

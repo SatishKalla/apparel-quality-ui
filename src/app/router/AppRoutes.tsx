@@ -2,9 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import AppLayout from "@/layouts/AppLayout";
 
-import Login from "@/auth/Login";
+import Login from "@/pages/Login";
 import ProtectedRoute from "./ProtectedRoutes";
-import { Dashboard } from "@/features/dashboard";
 import InspectionListPage from "@/features/inspections/pages/InspectionListPage";
 import CreateInspectionPage from "@/features/inspections/pages/CreateInspectionPage";
 import EditInspectionPage from "@/features/inspections/pages/EditInspectionPage";
@@ -21,6 +20,11 @@ import {
   InspectorDetailsPage,
   EditInspectorPage,
 } from "@/features/inspectors";
+import ReportsPage from "@/features/reports/pages/ReportsPage";
+import SettingsPage from "@/features/settings/pages/SettingsPage";
+import ProfilePage from "@/features/settings/pages/ProfilePage";
+import Dashboard from "@/features/dashboard/pages/Dashboard";
+import NotFoundPage from "@/pages/NotFoundPage";
 
 export default function AppRoutes() {
   return (
@@ -46,6 +50,13 @@ export default function AppRoutes() {
             <Route path="/inspectors/create" element={<CreateInspectorPage />} />
             <Route path="/inspectors/:id" element={<InspectorDetailsPage />} />
             <Route path="/inspectors/:id/edit" element={<EditInspectorPage />} />
+
+            <Route path="/reports" element={<ReportsPage />} />
+
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Route>
       </Routes>
