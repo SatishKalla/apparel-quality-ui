@@ -1,0 +1,14 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    image: aqip-frontend:v1.0.1
+
+    container_name: aqip-frontend
+
+    ports:
+      - "3000:80"
+
+    restart: unless-stopped
