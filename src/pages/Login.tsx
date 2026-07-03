@@ -7,6 +7,7 @@ import { AllRoutes } from "@/shared/constants/routes";
 const { Title, Paragraph, Text } = Typography;
 
 export default function Login() {
+  const a: string = 10;
   const navigate = useNavigate();
 
   const { login } = useAuth();
