@@ -1,31 +1,65 @@
-# Changelog
+# AQIP Release Checklist
 
-All notable changes to this project will be documented in this file.
+## Build
 
----
+- [ ] npm install
+- [ ] npm run lint
+- [ ] npm run build
 
-# v1.0.1 - github actions Release
+## Authentication
 
-Release Date: July 2026
+- [ ] Login
+- [ ] Logout
+- [ ] Protected Routes
 
-## Added
+## Dashboard
 
-- github workflows (ci.yml, release.yml files)
+- [ ] Summary Cards
+- [ ] Charts
+- [ ] Recent Inspections
 
-## Technical
+## Inspection
 
-- None
+- [ ] List
+- [ ] Search
+- [ ] Filter
+- [ ] Create
+- [ ] Edit
+- [ ] Details
+- [ ] Delete
 
-## Known Limitations
+## Factory
 
-- Mock Data
-- No Backend Integration
+- [ ] CRUD
 
-## Upcoming
+## Inspector
 
-- NestJS Backend
-- Docker
-- Docker Compose
-- Jenkins
-- Kubernetes
-- Argo CD
+- [ ] CRUD
+
+## Reports
+
+- [ ] Charts
+- [ ] Export Buttons
+
+## Settings
+
+- [ ] Profile
+- [ ] Notifications
+- [ ] Application Settings
+
+## Navigation
+
+- [ ] Sidebar
+- [ ] Breadcrumbs
+- [ ] 404 Page
+
+## Responsive
+
+- [ ] Desktop
+- [ ] Tablet
+
+## Final
+
+- [ ] No Console Errors
+- [ ] No TypeScript Errors
+- [ ] No ESLint Errors
