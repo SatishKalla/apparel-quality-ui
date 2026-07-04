@@ -11,6 +11,7 @@ Release Date: July 2026
 ## Added
 
 - github workflows (ci.yml, release.yml files)
+- docker
 
 ## Technical
 
@@ -24,8 +25,6 @@ Release Date: July 2026
 ## Upcoming
 
 - NestJS Backend
-- Docker
-- Docker Compose
 - Jenkins
 - Kubernetes
 - Argo CD
