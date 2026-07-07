@@ -4,14 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-# v1.0.1 - github actions Release
+# v1.0.2 - Production bug simulation and rollback testing
 
 Release Date: July 2026
 
 ## Added
 
-- github workflows (ci.yml, release.yml files)
-- docker
+- None
 
 ## Technical
 
