@@ -2,7 +2,7 @@ import { Button, Card, Form, Input, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
 
 import { useAuth } from "@/auth/useAuth";
-// import { AllRoutes } from "@/shared/constants/routes";
+import { AllRoutes } from "@/shared/constants/routes";
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -14,8 +14,7 @@ export default function Login() {
   const onFinish = async (values: { username: string; password: string }) => {
     await login(values.username, values.password);
 
-    // navigate(AllRoutes.dashboard);
-    navigate("/dashboard-broken");
+    navigate(AllRoutes.dashboard);
   };
 
   return (

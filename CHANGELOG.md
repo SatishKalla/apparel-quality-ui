@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-# v1.0.2 - Production bug simulation and rollback testing
+# v1.0.3 - Add docs and reverse a bug
 
 Release Date: July 2026
 
