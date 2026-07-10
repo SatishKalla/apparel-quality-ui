@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-# v1.0.4 - Changes in github pipeline and deployment process changes
+# v1.0.5 - Changes in github pipeline and deployment process changes
 
 Release Date: July 2026
 
