@@ -11,4 +11,11 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/build.yml
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Build Frontend
+        uses: ./.github/actions/build

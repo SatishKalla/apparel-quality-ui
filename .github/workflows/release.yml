@@ -6,46 +6,45 @@ on:
       - "v*"
 
 jobs:
-  build:
-    uses: ./.github/workflows/build.yml
-
   release:
-    name: Publish Docker Image
-
-    needs: build
-
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read
-      packages: write
+      contents: write
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+      - name: Build Frontend
+        uses: ./.github/actions/build
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Archive Build
+        run: |
+          cd dist
+          zip -r ../aqip-frontend-${GITHUB_REF_NAME}.zip .
 
-      - name: Extract Docker Metadata
-        id: meta
-        uses: docker/metadata-action@v5
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
         with:
-          images: ${{ secrets.DOCKERHUB_USERNAME }}/aqip-frontend
-          tags: |
-            type=ref,event=tag
+          files: aqip-frontend-${{ github.ref_name }}.zip
+          generate_release_notes: true
 
-      - name: Build and Push Docker Image
-        uses: docker/build-push-action@v6
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Deploy to S3
+        run: |
+          aws s3 sync dist s3://bucket \
+          --delete \
+          --cache-control "public,max-age=31536000,immutable"
+
+      - name: Invalidate CloudFront Cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"
