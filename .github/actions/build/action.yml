@@ -1,0 +1,28 @@
+name: Build AQIP Frontend
+description: Install dependencies, validate and build the React application
+
+runs:
+  using: composite
+
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22
+        cache: npm
+
+    - name: Install Dependencies
+      shell: bash
+      run: npm ci --legacy-peer-deps
+
+    - name: Run TypeScript Check
+      shell: bash
+      run: npm run type-check
+
+    - name: Run ESLint
+      shell: bash
+      run: npm run lint
+
+    - name: Build React Application
+      shell: bash
+      run: npm run build
