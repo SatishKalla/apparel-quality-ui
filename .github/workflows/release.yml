@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Frontend
-        uses: ./.github/actions/frontend-build
+        uses: ./.github/actions/build
 
       - name: Archive Build
         run: |
