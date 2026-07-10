@@ -28,16 +28,20 @@ jobs:
       contents: read
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Download Release Asset
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release download "${{ github.event.inputs.version }}" \
-            --pattern "apparel-quality-ui-${{ github.event.inputs.version }}.zip"
+            --repo ${{ github.repository }} \
+            --pattern "aqip-frontend-${{ github.event.inputs.version }}.zip"
 
       - name: Extract Release
         run: |
-          unzip apparel-quality-ui-${{ github.event.inputs.version }}.zip -d dist
+          unzip aqip-frontend-${{ github.event.inputs.version }}.zip -d dist
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
