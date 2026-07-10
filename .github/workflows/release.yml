@@ -19,32 +19,15 @@ jobs:
       - name: Build Frontend
         uses: ./.github/actions/build
 
-      - name: Archive Build
+      - name: Package Release Artifact
+        env:
+          VERSION: ${{ github.ref_name }}
         run: |
           cd dist
-          zip -r ../aqip-frontend-${GITHUB_REF_NAME}.zip .
+          zip -r "../aqip-frontend-${VERSION}.zip" .
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: aqip-frontend-${{ github.ref_name }}.zip
           generate_release_notes: true
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-
-      - name: Deploy to S3
-        run: |
-          aws s3 sync dist s3://${{ secrets.S3_BUCKET_NAME }} \
-          --delete \
-          --cache-control "public,max-age=31536000,immutable"
-
-      - name: Invalidate CloudFront Cache
-        run: |
-          aws cloudfront create-invalidation \
-            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
-            --paths "/*"

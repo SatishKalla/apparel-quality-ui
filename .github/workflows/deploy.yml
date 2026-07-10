@@ -1,0 +1,65 @@
+name: AQIP Frontend Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version (e.g. v1.2.0)"
+        required: true
+        type: string
+
+      environment:
+        description: "Deployment Environment"
+        required: true
+        default: production
+        type: choice
+        options:
+          - production
+
+jobs:
+  deploy:
+    name: Deploy Frontend
+
+    runs-on: ubuntu-latest
+
+    environment: ${{ github.event.inputs.environment }}
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Download Release Asset
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release download "${{ github.event.inputs.version }}" \
+            --pattern "aqip-frontend-${{ github.event.inputs.version }}.zip"
+
+      - name: Extract Release
+        run: |
+          unzip aqip-frontend-${{ github.event.inputs.version }}.zip -d dist
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Deploy to S3
+        run: |
+          aws s3 sync dist s3://${{ secrets.S3_BUCKET_NAME }} \
+          --delete \
+          --cache-control "public,max-age=31536000,immutable"
+
+      - name: Invalidate CloudFront Cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"
+
+      - name: Deployment Summary
+        run: |
+          echo "Frontend Version : ${{ github.event.inputs.version }}"
+          echo "Environment      : ${{ github.event.inputs.environment }}"
+          echo "Deployment Complete"
